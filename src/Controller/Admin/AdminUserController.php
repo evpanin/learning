@@ -29,7 +29,7 @@ class AdminUserController extends AdminBaseController
     }
 
     /**
-     * @Route("/admin/user/crate", name="admin_user_create")
+     * @Route("/admin/user/create", name="admin_user_create")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return RedirectResponse|Response
