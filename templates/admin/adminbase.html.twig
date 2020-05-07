@@ -2,11 +2,45 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
+    <title>{% block title %}Админочка{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/framework/fontawesome-4.7.0/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.4.1/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css') }}">
+    {% endblock %}
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand border-right" href="{{ path('admin_home') }}">
+        Админочка
+        <i class="fa fa-microchip ml-2 mr-2" aria-hidden="true"></i>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('admin_home') }}">Главная <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('admin_user') }}">Пользователи</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" target="_blank" href="{{ path('home') }}">Выход на сайт </a>
+            </li>
+        </ul>
+        <form class="form-inline">
+            <a href="{{ path('app_logout') }}" class="btn btn-outline-info my-2 my-sm-0" type="submit">Выход</a>
+        </form>
+    </div>
+</nav>
 {% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/framework/bootstrap-4.4.1/js/bootstrap.min.js') }}"></script>
+{% endblock %}
 </body>
 </html>
