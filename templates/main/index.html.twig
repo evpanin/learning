@@ -12,5 +12,27 @@
         </div>
     </div>
 
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12 text-center mt-5">
+                    <div id="app">
+                        <h1 class="display-1">
+                            [[ message ]]
+                        </h1>
+                    </div>
+            </div>
+        </div>
+    </div>
 
+{% endblock %}
+{% block addJs %}
+    <script>
+        Vue.options.delimiters = ['[[',']]'];
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello world!'
+            },
+        });
+    </script>
 {% endblock %}
