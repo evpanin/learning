@@ -1,0 +1,73 @@
+{% extends 'admin/adminbase.html.twig' %}
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <h1 class="display-4 text-center mt-5">
+                    {{ title }}
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters">
+            {% if check_category is not empty %}
+                <div class="col-12 mt-5">
+                    <a href="{{ path('admin_post_create') }}" class="btn btn-success">Создать пост</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row no-gutters justify-content-center mt-3">
+            <div class="col-8">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-12">
+                {% if check_category is empty %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <p>
+                            Создание постов невозможно, сначала создай категорию.
+                        </p>
+                        <hr>
+                        <a href="{{ path('admin_category_create') }}">
+                            Создать категорию
+                        </a>
+                    </div>
+                    {% else %}
+                    <h2>Список постов</h2>
+                    <ul>
+                        {% for post_item in post %}
+                            <li>
+                                {{ post_item.title }}
+
+                                <a href="{{ path('admin_post_update', {'id': post_item.id }) }}"
+                                   class="btn-link">
+                                    Редактровать
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
