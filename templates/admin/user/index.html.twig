@@ -10,27 +10,68 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+
+
+    <div class="container">
+        <div class="row no-gutters justify-content-center mt-3">
+            <div class="col-8">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">ФИО</th>
+                        <th scope="col">Роли</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.fullName }}</td>
+                            <td>{{ user.roles | json_encode }}</td>
+                            <td>
+                                <a href="{{ path('admin_user_update', {'userId': user.id }) }}"
+                                   class="btn btn-primary">
+                                    Редактировать
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
         <div class="row no-gutters">
             <div class="col-12 mt-5">
                 <a href="{{ path('admin_user_create') }}" class="btn btn-success">Создать пользователя</a>
             </div>
         </div>
     </div>
-
-
-    <div class="container-fluid">
-        <div class="row no-gutters">
-            <div class="col-12">
-                <h2>Список пользователей</h2>
-                <ul>
-                    {% for user in users %}
-                        <li>{{ user.email }}, {{ user.roles | json_encode }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-
 
 {% endblock %}

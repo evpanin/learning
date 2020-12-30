@@ -51,10 +51,10 @@ class Post
     private $is_published;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
      */
     private $category;
+
 
     public function getId(): ?int
     {
@@ -154,6 +154,18 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCategiory(): ?Category
+    {
+        return $this->categiory;
+    }
+
+    public function setCategiory(?Category $categiory): self
+    {
+        $this->categiory = $categiory;
 
         return $this;
     }

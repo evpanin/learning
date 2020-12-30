@@ -25,6 +25,7 @@ class PostType extends AbstractType
             ))
             ->add('category', EntityType::class, array(
                 'label' => 'Категории',
+                'placeholder' => 'Выбрать категорию',
                 'class' => Category::class,
                 'choice_label' => 'title'
             ))

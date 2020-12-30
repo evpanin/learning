@@ -10,15 +10,6 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row no-gutters">
-            {% if check_category is not empty %}
-                <div class="col-12 mt-5">
-                    <a href="{{ path('admin_post_create') }}" class="btn btn-success">Создать пост</a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
 
 
     <div class="container">
@@ -39,7 +30,7 @@
     <div class="container">
         <div class="row no-gutters">
             <div class="col-12">
-                {% if check_category is empty %}
+                {% if category is empty %}
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <p>
                             Создание постов невозможно, сначала создай категорию.
@@ -51,26 +42,46 @@
                     </div>
                     {% else %}
                     <h2>Список постов</h2>
-                    <ul>
-                        {% for post_item in post %}
-                            <li>
-                                <img src="{{ asset('uploads/post/') }}{{ post_item.image }}"
-                                     style="width: 100px;"
-                                     alt="">
-                                {{ post_item.title }}
+                        <div class="row no-gutters">
+                            {% for category_item in category %}
+                                {% for post in category_item.posts %}
 
-                                <a href="{{ path('admin_post_update', {'id': post_item.id }) }}"
-                                   class="btn-link">
-                                    Редактровать
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                                    <div class="col-4 p-2">
+                                        <div class="card" style="width:100%;">
 
+                                            {% if post.image is null %}
+                                                <img class="card-img-top" src="" alt="Card image cap">
+                                            {% else %}
+                                                <img  class="card-img-top"  style="max-height: 200px; overflow: hidden;" src="{{ asset('uploads/post/') }}{{ post.image }}"
+                                                      alt="">
+                                            {% endif %}
+                                            <div class="card-body">
+                                                <h6 class="text-muted"> {{ post.category.title }}</h6>
+                                                <h5 class="card-title"> {{ post.title }}</h5>
+                                                <a href="{{ path('admin_post_update', {'postId': post.id}) }}" class="btn btn-success">
+                                                    Редактровать
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
                 {% endif %}
             </div>
         </div>
     </div>
 
+
+
+    <div class="container">
+        <div class="row no-gutters">
+            {% if category is not empty %}
+                <div class="col-12 mt-5">
+                    <a href="{{ path('admin_post_create') }}" class="btn btn-success">Создать пост</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}

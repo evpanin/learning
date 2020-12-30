@@ -10,14 +10,6 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row no-gutters">
-            <div class="col-12 mt-5">
-                <a href="{{ path('admin_category_create') }}" class="btn btn-success">Создать категорию</a>
-            </div>
-        </div>
-    </div>
-
 
 
     <div class="container-fluid">
@@ -38,20 +30,53 @@
     <div class="container-fluid">
         <div class="row no-gutters">
             <div class="col-12">
-                <h2>Список категорий</h2>
-                <ul>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">title</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if category is empty %}
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <span class="text-black-50">
+                                    Категории не созданы!
+                                </span>
+                            </td>
+                        </tr>
+                    {% endif %}
+
                     {% for category_item in category %}
-                        <li>{{ category_item.title }}
-                            <a href="{{ path('admin_category_update', {'id': category_item.id }) }}
+                        <tr>
+                            <th scope="row">{{ category_item.id }}</th>
+                            <td>{{ category_item.title }}</td>
+                            <td>
+                                <a href="{{ path('admin_category_update', {'categoryId': category_item.id }) }}
                                 " class="btn-link">
-                                Редактровать
-                            </a>
-                        </li>
+                                    Редактровать
+                                </a>
+                            </td>
+                        </tr>
                     {% endfor %}
-                </ul>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
+
+
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12 mt-5">
+                <a href="{{ path('admin_category_create') }}" class="btn btn-success">Создать категорию</a>
+            </div>
+        </div>
+    </div>
+
 
 
 {% endblock %}
